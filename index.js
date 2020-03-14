@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById("input").addEventListener("input", function(e){
         e.preventDefault()
         var searchString = e.target.value.toLowerCase();
+        let urlEncodedSearchString = encodeURIComponent(searchString);
+        axios.get("http://www.omdbapi.com/?apikey=3430a78&s=" + urlEncodedSearchString)
+            .then(function(response){
+                console.log(response.data);
+            });
 		var filteredData = movieData.filter(function (movie) {
 			var foundInTitle = movie.Title.toLowerCase().indexOf(searchString) > -1;
 			var foundInDate = movie.Year.toLowerCase().indexOf(searchString) > -1;
